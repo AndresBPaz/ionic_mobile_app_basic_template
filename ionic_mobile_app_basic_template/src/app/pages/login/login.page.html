@@ -1,5 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start" (click)="close(false)">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
     <ion-title>login</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -7,10 +10,10 @@
 <ion-content [fullscreen]="true">
   <div class="logo-block">
     <ion-grid>
-      <img class="logo" src="assets/image/logo.png">
+      <img class="logo" src="https://source.unsplash.com/800x600/?nature">
     </ion-grid>
   </div>
-  <ion-segment scrollable="true" mode="md" >
+  <ion-segment scrollable="true" mode="md" color="{{settings.theme.button}}" value="{{segment}}" (ionChange)="segmentChanged($event)">
     <ion-segment-button color="danger" value="login">
       <ion-label>Login</ion-label>
     </ion-segment-button>
@@ -20,8 +23,8 @@
   </ion-segment>
 
   <div class="divlogin">
-    <ion-card>
-      <div class="form">
+    <ion-card mode="{{settings.mode}}">
+      <div class="form" *ngIf="segment == 'login'">
         <ion-list>
           <form [formGroup]="form">
               <ion-item mode="md">
@@ -44,6 +47,67 @@
           </div>
         </div>
       </div>
+
+      <div class="form" class="form" *ngIf="segment == 'register'">
+        <ion-list>
+          <form [formGroup]="formRegister">
+            <ion-item mode="md">
+              <ion-icon slot="start" name="person" mode="md"></ion-icon>
+            <ion-input required type="text" formControlName="first_name" placeholder='First Name'></ion-input>
+            </ion-item>
+            <ion-item mode="md">
+              <ion-icon slot="start" name="person" mode="md"></ion-icon>
+            <ion-input required type="text" formControlName="last_name" placeholder="last name"></ion-input>
+            </ion-item>
+            <ion-item mode="md">
+              <ion-icon slot="start" name="call" mode="md"></ion-icon>
+            <ion-input required type="text" formControlName="phone" placeholder="Phone"></ion-input>
+            </ion-item>
+            <ion-item mode="md">
+              <ion-icon slot="start" name="mail" mode="md"></ion-icon>
+            <ion-input required type="email" formControlName="email" placeholder="{Email/username"></ion-input>
+            </ion-item>
+            <ion-item mode="md">
+              <ion-icon slot="start" name="eye" mode="md"></ion-icon>
+            <ion-input required type="password" formControlName="password" placeholder="Password"></ion-input>
+            </ion-item>
+            <ion-item mode="md">
+              <ion-icon slot="start" name="person" mode="md"></ion-icon>
+              <ion-select required formControlName="role" placeholder="Rol">
+                <ion-select-option value="customer">Soy un cliente</ion-select-option>
+                <ion-select-option value="seller">Soy un comercio</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </form>
+          <ion-button shape="undefined" mode="md" style="background-color: var(--app-color-violetaclaro)" expand="block" fill="solid" (click)="onRegister()">Register</ion-button>
+        </ion-list>
+
+        <div class="errors" *ngIf="errorsRegister">
+          <div *ngFor="let error of errorsRegister" style="text-align: center; padding: 8px; margin-top: 16px;">
+            <ion-label color="danger" class="error" [innerHTML]="error.value"></ion-label>
+          </div>
+         </div>
+      </div>
+
     </ion-card>
+
+    <!--ion-grid class="social-login">
+      <ion-row>
+      <ion-col size="6">
+      <ion-button expand="block" shape="undefined" mode="md" fill="solid" color="google" (click)="googleLogin()" [disabled]="googleLogingInn">
+      <ion-icon slot="start" name="logo-google"></ion-icon>{{"Google"| translate}}</ion-button>
+      <br/>
+      </ion-col>
+      <ion-col size="6">
+      <ion-button expand="block" shape="undefined" mode="md" fill="solid" color="facebook" (click)="facebookLogin()" [disabled]="facebookLogingInn">
+      <ion-icon slot="start" name="logo-facebook"></ion-icon>{{"Facebook"| translate}}</ion-button>
+      </ion-col>
+        <ion-col size="12" *ngIf="appleshowbutton">
+          <ion-button expand="block" shape="undefined" mode="md" fill="solid" color="white" (click)="appleLogin()" [disabled]="appleLogingInn">
+          <ion-icon slot="start" name="logo-apple"></ion-icon>Apple</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid-->
+
   </div>
 </ion-content>
