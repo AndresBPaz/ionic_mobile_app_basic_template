@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ModalController, NavController } from '@ionic/angular';
+import { Settings } from './../../settings'; 
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,15 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(
+    public modalCtrl: ModalController, 
+    //params on navcontroller
+    public navCtrl: NavController,
+    public settings: Settings
+  ) {}
+
+  login(){
+    this.navCtrl.navigateForward("/login");
+  }
 
 }

@@ -1,25 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
-  private apiUrl = 'https://dominatecodeco.com/wp-json';
+export class ApiService { 
 
-  constructor(private http: HttpClient, private storage: Storage) {}
+  constructor(
+    private http: HttpClient, 
+    private storage: Storage,
 
-  login(username: string, password: string): Promise<any> {
-    const url = `${this.apiUrl}/jwt-auth/v1/token`;
+    ) {}
 
-    return this.http
-      .post(url, { username, password })
-      .toPromise()
-      .then((response: any) => {
-        // Almacenar el token en el almacenamiento local para futuras solicitudes
-        return this.storage.set('token', response.token);
-      });
+  login(username: string, password: string) {
+    const url = `${environment.apiUrl}/jwt-auth/v1/token`;
+    return this.http.post(url, { username, password });
   }
 
   logout(): Promise<any> {

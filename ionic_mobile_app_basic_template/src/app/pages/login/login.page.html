@@ -3,7 +3,7 @@
     <ion-buttons slot="start" (click)="close(false)">
       <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>login</ion-title>
+    <ion-title>{{ settings.appname }} {{"login" | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,10 +15,10 @@
   </div>
   <ion-segment scrollable="true" mode="md" color="{{settings.theme.button}}" value="{{segment}}" (ionChange)="segmentChanged($event)">
     <ion-segment-button color="danger" value="login">
-      <ion-label>Login</ion-label>
+      <ion-label>{{"login" | translate}}</ion-label>
     </ion-segment-button>
     <ion-segment-button color="danger" value="register">
-      <ion-label>Register</ion-label>
+      <ion-label>{{"Register" | translate}}</ion-label>
     </ion-segment-button>
   </ion-segment>
 
@@ -29,23 +29,23 @@
           <form [formGroup]="form">
               <ion-item mode="md">
                 <ion-icon slot="start" name="person" mode="md"></ion-icon>
-                <ion-input type="text" formControlName="username" placeholder="username" ></ion-input>
+                <ion-input type="text" formControlName="username" placeholder='{{"username" | translate}}' ></ion-input>
               </ion-item>
 
               <ion-item mode="md">
                 <ion-icon slot="start" name="eye" mode="md"></ion-icon>
-                <ion-input type="password" formControlName="password" placeholder="password"></ion-input>
+                <ion-input type="password" formControlName="password" placeholder='{{"password" | translate}}'></ion-input>
               </ion-item>
           </form>
         </ion-list>
 
-        <ion-button fill="solid" mode="md" expand="block" (click)="login()"></ion-button>
-        <ion-button style="margin-top: 0px;" color="dark" expand="full" fill="clear" (click)="forgotton()">{{"Forgot Password"}}?</ion-button>
-        <div class="errors" *ngIf="errors">
-          <div *ngFor="let error of errors" style="text-align: center; padding-top: 10px;">
-            <ion-label color="danger" [innerHTML]="error.value"></ion-label>
-          </div>
+        <ion-button fill="solid" mode="md" expand="block" (click)="login()">{{"login" | translate}}</ion-button>
+        <ion-button style="margin-top: 0px;" color="dark" expand="full" fill="clear" (click)="forgotton()">{{"Forgot Password" | translate}}?</ion-button>
+        <!-- si errorMessage es diferente de nulo se muestra el mensaje de error -->
+        <div class="alert alert-danger errors" style="text-align: center; padding: 10px;" *ngIf="errorMessage">
+          <ion-label color="danger" [innerHTML]="errorMessage"></ion-label>
         </div>
+         
       </div>
 
       <div class="form" class="form" *ngIf="segment == 'register'">
@@ -65,7 +65,7 @@
             </ion-item>
             <ion-item mode="md">
               <ion-icon slot="start" name="mail" mode="md"></ion-icon>
-            <ion-input required type="email" formControlName="email" placeholder="{Email/username"></ion-input>
+            <ion-input required type="email" formControlName="email" placeholder="Email/username"></ion-input>
             </ion-item>
             <ion-item mode="md">
               <ion-icon slot="start" name="eye" mode="md"></ion-icon>
@@ -82,11 +82,9 @@
           <ion-button shape="undefined" mode="md" style="background-color: var(--app-color-violetaclaro)" expand="block" fill="solid" (click)="onRegister()">Register</ion-button>
         </ion-list>
 
-        <div class="errors" *ngIf="errorsRegister">
-          <div *ngFor="let error of errorsRegister" style="text-align: center; padding: 8px; margin-top: 16px;">
-            <ion-label color="danger" class="error" [innerHTML]="error.value"></ion-label>
-          </div>
-         </div>
+        <div class="alert alert-danger errors" style="text-align: center; padding-top: 10px;" *ngIf="errorMessage">
+          <ion-label color="danger" [innerHTML]="errorMessage"></ion-label>
+        </div>
       </div>
 
     </ion-card>

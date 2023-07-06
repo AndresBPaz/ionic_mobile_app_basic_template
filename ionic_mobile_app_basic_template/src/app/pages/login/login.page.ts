@@ -1,14 +1,13 @@
 //pagina de login para el usuario
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LoadingController, NavController, Platform, ModalController } from '@ionic/angular';
-import { ApiService } from 'src/app/services/api.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ModalController, NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { ApiService } from 'src/app/services/api.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { Settings } from './../../settings';
-import { SegmentChangeEventDetail } from '@ionic/core';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -17,14 +16,16 @@ import { SegmentChangeEventDetail } from '@ionic/core';
 })
 export class LoginPage implements OnInit {
 
-  errors: any;
-  username: string = '';
-  password: string = '';
+  errorMessage: any ; 
   form: any;
   formRegister: any;
   path: any = 'login'; 
   segment: any = 'login';
   errorsRegister: any;
+
+  isenableSubmit: boolean = true;
+
+  status: any = {};
 
   constructor(
     private authService: AuthService,
@@ -33,6 +34,11 @@ export class LoginPage implements OnInit {
     public api: ApiService, 
     private storage: Storage,
     public settings: Settings, 
+    public modalCtrl: ModalController, 
+    //params on navcontroller
+    public navCtrl: NavController,
+    public translate: TranslateService,
+    public translateService: TranslateService
     //private nativeStorage: NativeStorage,
     ) { 
       this.form = this.fb.group({
@@ -49,8 +55,9 @@ export class LoginPage implements OnInit {
       });
     }
     
-  ngOnInit() {        
-    throw new Error('Method not implemented.');
+  ngOnInit() {    
+    //navCtrl data path
+    this.path = this.navCtrl;
   }
 
   forgotton() {
@@ -58,18 +65,34 @@ export class LoginPage implements OnInit {
   }
 
   login() {
-    if (this.username && this.password) {
-      this.api.login(this.username, this.password)
-      .then(() => {
-        // Inicio de sesión exitoso, redirigir a la página principal o realizar otra acción deseada
-        
-      })
-      .catch(error => {
-        // Manejar el error de inicio de sesión
-        console.error('Error de inicio de sesión:', error);
-      });
+    if(this.form.valid) {
+      this.isenableSubmit = false;
+      this.authService.login(this.form.value.username, this.form.value.password).subscribe(
+        (response) => {
+          // Manejar la respuesta de éxito de la autenticación
+          //console.log(response);
+          this.isenableSubmit = false;
+        },
+        (error) => {
+          // Manejar el error de autenticación
+          this.errorMessage = '<strong>ERROR<\/strong>:'+error.error.message;
+          console.error(error);
+          /*if (this.errors) {
+            this.errors = this.errors;
+            for (var key in this.errors) {
+                this.errors[key].forEach((item, index) => {
+                    this.errors[key][index] = this.errors[key][index].replace('<strong>ERROR<\/strong>:', '');
+                    this.errors[key][index] = this.errors[key][index].replace('/a>', '/span>');
+                    this.errors[key][index] = this.errors[key][index].replace('<a', '<span');
+                });
+            }
+          }*/
+
+          this.isenableSubmit = true;
+        }
+      );
+
     }
-    throw new Error('Method not implemented.');
   }
 
   onRegister(){
@@ -78,7 +101,9 @@ export class LoginPage implements OnInit {
   }
 
   close( isClose: boolean){
-    throw new Error('Method not implemented.');
+    this.modalCtrl.dismiss({
+      'loggedIn': status,
+    });
   }
 
   segmentChanged(event: Event) {
