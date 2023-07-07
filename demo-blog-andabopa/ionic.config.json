@@ -1,0 +1,7 @@
+{
+  "name": "DemoBlogAndabopa",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
