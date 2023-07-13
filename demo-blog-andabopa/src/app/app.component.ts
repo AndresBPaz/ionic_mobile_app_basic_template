@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { IonRouterOutlet, Platform } from '@ionic/angular';
+import { Settings } from './settings';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -6,13 +9,28 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
+    { title: 'Blog', url: '/folder/inbox', icon: 'newspaper' },
+    { title: 'Buscar', url: '/search', icon: 'search' },
+    { title: 'Desarrollo', url: '/folder/favorites', icon: 'code-working' },
+    { title: 'Cuenta', url: '/folder/archived', icon: 'person' },
+    { title: 'Nuestra organización', url: '/folder/spam', icon: 'business' },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+
+  //@ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
+  constructor(private platform: Platform, public settings: Settings) {
+    this.initializeApp();
+  }
+
+  ngAfterViewInit() {
+    // Asigna el valor del IonRouterOutlet después de que la vista se haya inicializado
+    //if (this.routerOutlet) {
+      // Hacer lo que necesites con el IonRouterOutlet aquí
+    //}
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+      // Realiza cualquier inicialización necesaria aquí
+    });
+  }
 }

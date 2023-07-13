@@ -1,0 +1,111 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ settings.appname }} {{"login" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="logo-block">
+    <ion-grid>
+      <img class="logo" src="https://source.unsplash.com/800x600/?nature">
+    </ion-grid>
+  </div>
+  <ion-segment scrollable="true" mode="md" color="{{settings.theme.button}}" value="{{segment}}" (ionChange)="segmentChanged($event)">
+    <ion-segment-button color="danger" value="login">
+      <ion-label>{{"login" | translate}}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button color="danger" value="register">
+      <ion-label>{{"Register" | translate}}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div class="divlogin">
+    <ion-card mode="{{settings.mode}}">
+      <div class="form" *ngIf="segment == 'login'">
+        <ion-list>
+          <form [formGroup]="form">
+              <ion-item mode="md">
+                <ion-icon slot="start" name="person" mode="md"></ion-icon>
+                <ion-input type="text" formControlName="username" placeholder='{{"username" | translate}}' ></ion-input>
+              </ion-item>
+
+              <ion-item mode="md">
+                <ion-icon slot="start" name="eye" mode="md"></ion-icon>
+                <ion-input type="password" formControlName="password" placeholder='{{"password" | translate}}'></ion-input>
+              </ion-item>
+          </form>
+        </ion-list>
+
+        <ion-button fill="solid" mode="md" expand="block" (click)="login()">{{"login" | translate}}</ion-button>
+        <ion-button style="margin-top: 0px;" color="dark" expand="full" fill="clear" (click)="forgotton()">{{"Forgot Password" | translate}}?</ion-button>
+        <!-- si errorMessage es diferente de nulo se muestra el mensaje de error -->
+        <div class="alert alert-danger errors" style="text-align: center; padding: 10px;" *ngIf="errorMessage">
+          <ion-label color="danger" [innerHTML]="errorMessage"></ion-label>
+        </div>
+         
+      </div>
+
+      <div class="form" class="form" *ngIf="segment == 'register'">
+        <ion-list>
+          <form [formGroup]="formRegister">
+            <ion-item mode="md">
+              <ion-icon slot="start" name="person" mode="md"></ion-icon>
+            <ion-input required type="text" formControlName="first_name" placeholder='First Name'></ion-input>
+            </ion-item>
+            <ion-item mode="md">
+              <ion-icon slot="start" name="person" mode="md"></ion-icon>
+            <ion-input required type="text" formControlName="last_name" placeholder="last name"></ion-input>
+            </ion-item>
+            <ion-item mode="md">
+              <ion-icon slot="start" name="call" mode="md"></ion-icon>
+            <ion-input required type="text" formControlName="phone" placeholder="Phone"></ion-input>
+            </ion-item>
+            <ion-item mode="md">
+              <ion-icon slot="start" name="mail" mode="md"></ion-icon>
+            <ion-input required type="email" formControlName="email" placeholder="Email/username"></ion-input>
+            </ion-item>
+            <ion-item mode="md">
+              <ion-icon slot="start" name="eye" mode="md"></ion-icon>
+            <ion-input required type="password" formControlName="password" placeholder="Password"></ion-input>
+            </ion-item>
+            <ion-item mode="md">
+              <ion-icon slot="start" name="person" mode="md"></ion-icon>
+              <ion-select required formControlName="role" placeholder="Rol">
+                <ion-select-option value="customer">Soy un cliente</ion-select-option>
+                <ion-select-option value="seller">Soy un comercio</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </form>
+          <ion-button shape="undefined" mode="md" style="background-color: var(--app-color-violetaclaro)" expand="block" fill="solid" (click)="onRegister()">Register</ion-button>
+        </ion-list>
+
+        <div class="alert alert-danger errors" style="text-align: center; padding-top: 10px;" *ngIf="errorMessage">
+          <ion-label color="danger" [innerHTML]="errorMessage"></ion-label>
+        </div>
+      </div>
+
+    </ion-card>
+
+    <!--ion-grid class="social-login">
+      <ion-row>
+      <ion-col size="6">
+      <ion-button expand="block" shape="undefined" mode="md" fill="solid" color="google" (click)="googleLogin()" [disabled]="googleLogingInn">
+      <ion-icon slot="start" name="logo-google"></ion-icon>{{"Google"| translate}}</ion-button>
+      <br/>
+      </ion-col>
+      <ion-col size="6">
+      <ion-button expand="block" shape="undefined" mode="md" fill="solid" color="facebook" (click)="facebookLogin()" [disabled]="facebookLogingInn">
+      <ion-icon slot="start" name="logo-facebook"></ion-icon>{{"Facebook"| translate}}</ion-button>
+      </ion-col>
+        <ion-col size="12" *ngIf="appleshowbutton">
+          <ion-button expand="block" shape="undefined" mode="md" fill="solid" color="white" (click)="appleLogin()" [disabled]="appleLogingInn">
+          <ion-icon slot="start" name="logo-apple"></ion-icon>Apple</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid-->
+
+  </div>
+</ion-content>
