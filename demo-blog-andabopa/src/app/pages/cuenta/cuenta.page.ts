@@ -17,4 +17,12 @@ export class CuentaPage implements OnInit {
   ngOnInit() {
   }
 
+  editarPerfil(){
+
+  }
+
+  cerrarSesion(){
+    
+  }
+
 }

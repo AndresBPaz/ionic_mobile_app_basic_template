@@ -1,0 +1,27 @@
+<ion-header [translucent]="true" mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Post</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- muestra el contenido del post --> 
+    <ion-card *ngIf="post">
+      <ion-card-header>
+        <ion-card-title>{{ post.title.rendered }}</ion-card-title>
+        <ion-card-subtitle>{{ post.date | date }}</ion-card-subtitle>
+      </ion-card-header>
+  
+      <ion-card-content>
+        <!-- Aquí puedes mostrar el contenido del post -->
+        <!-- Por ejemplo, si el contenido es HTML -->
+        <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(post.content.rendered)"  (click)="onLinkClick($event)"></div>
+      </ion-card-content>
+    </ion-card> 
+</ion-content>

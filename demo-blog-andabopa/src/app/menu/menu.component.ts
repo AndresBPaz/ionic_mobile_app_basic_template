@@ -10,9 +10,9 @@ export class MenuComponent  implements OnInit {
   public appPages = [
     { title: 'Blog', url: '/home', icon: 'newspaper' },
     { title: 'Buscar', url: '/search', icon: 'search' },
-    { title: 'Desarrollo', url: '/page/desarrollo', icon: 'code-working' },
+    { title: 'Desarrollo', url: '/page/216', icon: 'code-working' },
     { title: 'Cuenta', url: '/cuenta', icon: 'person' },
-    { title: 'Nuestra organización', url: '/page/about', icon: 'business' },
+    { title: 'Nuestra organización', url: '/page/13', icon: 'business' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor(

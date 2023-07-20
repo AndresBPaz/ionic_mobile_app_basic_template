@@ -1,8 +1,11 @@
 <ion-header [translucent]="true"  mode='ios'>
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button> <!-- Agrega el botón del menú aquí -->
     </ion-buttons> 
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
     <!-- form de busqueda -->
     <ion-searchbar mode="ios" animated [(ngModel)]="searchInput" (ionChange)="onInput()" placeholder="Search"></ion-searchbar>
   </ion-toolbar>

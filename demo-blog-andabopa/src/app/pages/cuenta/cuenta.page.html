@@ -1,16 +1,35 @@
 <ion-header [translucent]="true" >
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
     <ion-title>cuenta</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">cuenta</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-list>
+    <ion-item>
+      <ion-label>Nombre:</ion-label>
+      <ion-note>Usuario de ejemplo</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Correo electrónico:</ion-label>
+      <ion-note>usuario@example.com</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Teléfono:</ion-label>
+      <ion-note>+1 123 456 7890</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Dirección:</ion-label>
+      <ion-note>123 Calle Principal</ion-note>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="editarPerfil()">Editar Perfil</ion-button>
+  <ion-button expand="full" color="danger" (click)="cerrarSesion()">Cerrar Sesión</ion-button>
 </ion-content>

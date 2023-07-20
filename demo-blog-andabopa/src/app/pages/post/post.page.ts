@@ -3,21 +3,21 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Settings } from 'src/app/settings';
 import {TranslateService} from '@ngx-translate/core';
 import { Title } from '@angular/platform-browser';
-import { PagesService } from 'src/app/services/pages.service'; 
+import { PostsService } from 'src/app/services/posts.service'; 
 import { LoadingController } from '@ionic/angular'; 
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Browser } from '@capacitor/browser';
 
 @Component({
-  selector: 'app-page',
-  templateUrl: './page.page.html',
-  styleUrls: ['./page.page.scss'],
+  selector: 'app-post',
+  templateUrl: './post.page.html',
+  styleUrls: ['./post.page.scss'],
 })
-export class PagePage implements OnInit {
+export class PostPage implements OnInit {
 
-  pageId: string = '';
-  page: any;
-
+  postId: string = '';
+  post: any; // Aquí almacenaremos los detalles de la entrada del blog 
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -25,17 +25,23 @@ export class PagePage implements OnInit {
     public translate: TranslateService,
     public translateService: TranslateService,
     private titleService: Title,
-    public pagesService: PagesService,
+    public postService: PostsService,
     private loadingController: LoadingController,
     public sanitizer: DomSanitizer 
-  ) {
-    this.titleService.setTitle('Page'); // Establecer el título de la página
-    this.pageId = this.route.snapshot.paramMap.get('id') ?? '';
+
+  ) { 
+    this.titleService.setTitle('Post'); // Establecer el título de la página
+    //obtiene el id de los parametros de url
+    this.postId = this.route.snapshot.paramMap.get('id') ?? '';
     // Verificar si postId es null y navegar hacia la página anterior si es así
-    if (this.pageId === '') {
+    if (this.postId === '') {
       this.router.navigate(['/home']); // Cambiar '/home' por la ruta de la página anterior
     } 
-    this.loadPageDetails();
+    
+    this.loadPostDetails();
+  }
+
+  ngOnInit() {
   }
 
   openExternalLink(url: string) {
@@ -52,34 +58,32 @@ export class PagePage implements OnInit {
     }
   }
 
-  async loadPageDetails() {
+  async loadPostDetails() {
     const loading = await this.loadingController.create({
       message: 'Cargando...', // Mensaje que se mostrará mientras carga
     });
     await loading.present();
 
     try {
+    
+     await this.postService.getPostById(this.postId) 
+      .subscribe(
+        (post: any) => {
+          this.post = post;
+          console.log(post);
+          loading.dismiss();
+        },
+        (error: any) => {
+          console.error('Error al obtener el post', error);
+          loading.dismiss();
+        }
+      );
 
-     await this.pagesService.getPageById(this.pageId)
-        .subscribe(
-          (page: any) => {
-            this.page = page;
-            console.log(page);
-            loading.dismiss();
-          },
-          (error: any) => {
-            console.error('Error al obtener la pagina', error);
-            loading.dismiss();
-          }
-        );
-
-    }catch (error) {
-      console.error('Error al obtener la pagina', error);
+    } catch (error) {
+      console.error('Error al obtener el post', error);
       loading.dismiss();
     }
   }
 
-  ngOnInit() {
-  }
 
 }

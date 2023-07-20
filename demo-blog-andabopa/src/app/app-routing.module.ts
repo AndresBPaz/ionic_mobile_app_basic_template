@@ -1,11 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import { SearchPage } from './pages/search/search.page'; 
-import { AppComponent } from './app.component';
-import { HomePage } from './pages/home/home.page';
-import { PagePage } from './pages/page/page.page';
-
 const routes: Routes = [
   {
     path: '',
@@ -16,7 +11,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
   {
-    path: 'page/:page',
+    path: 'page/:id',
     loadChildren: () => import('./pages/page/page.module').then(m => m.PagePageModule)
   },
   {
@@ -30,6 +25,10 @@ const routes: Routes = [
   {
     path: 'cuenta',
     loadChildren: () => import('./pages/cuenta/cuenta.module').then( m => m.CuentaPageModule)
+  },
+  {
+    path: 'post/:id',
+    loadChildren: () => import('./pages/post/post.module').then( m => m.PostPageModule)
   }
 ];
 

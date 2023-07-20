@@ -1,16 +1,15 @@
 <ion-header [translucent]="true"  mode='ios'>
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
     <ion-title>page</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">page</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div *ngIf="page" [innerHTML]="sanitizer.bypassSecurityTrustHtml(page.content.rendered)"  (click)="onLinkClick($event)"></div>
 </ion-content>
