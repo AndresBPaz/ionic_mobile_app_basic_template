@@ -1,0 +1,87 @@
+.wallet-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.wallet-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-item {
+ // width: 90%; /* Ajustar el ancho para que las tarjetas ocupen el 50% del contenedor y se vean en la misma fila */
+  max-width: 400px;
+  margin: 10px;
+  border-radius: 10px;
+ // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-item ion-card {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+.card-icon {
+  font-size: 36px;
+  margin-right: 12px;
+}
+
+.card-content {
+  flex: 1;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.card-details {
+  font-size: 14px;
+}
+
+.card-date {
+  font-size: 12px;
+  color: #888;
+}
+
+
+/* Estilos previos... */
+
+.benefits-container {
+  width: 100%;
+  background-color: #f5f5f5;
+  padding: 10px 0;
+}
+
+.benefits-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.benefit-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.benefit-icon {
+  font-size: 28px;
+  color: #888;
+}
+
+.benefit-title {
+  font-size: 14px;
+  color: #888;
+  margin-top: 5px;
+}

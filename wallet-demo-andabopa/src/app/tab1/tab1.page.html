@@ -1,0 +1,78 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="header-title">Wallet Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="wallet-content">
+  <div class="balance-container">
+    <ion-item lines="none" class="balance-item">
+      <ion-label class="balance-label">Balance:</ion-label>
+      <ion-label class="balance-amount">$152,300</ion-label>
+      <ion-button color="primary" size="small" slot="end" (click)="showField()">Add Balance</ion-button>
+    </ion-item>
+
+    <div *ngIf="show" class="add-balance-section">
+      <ion-item lines="none" class="add-balance-item">
+        <ion-input required type="number" [(ngModel)]="amount" name="amount" placeholder="Enter Amount"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" (click)="addTopup()" class="add-balance-button">Add</ion-button>
+    </div>
+  </div>
+
+  <div class="benefits-container">
+    <div class="benefits-bar">
+      <div class="benefit-item">
+        <ion-icon name="shield-checkmark-outline" class="benefit-icon"></ion-icon>
+        <p class="benefit-title">Secure Transactions</p>
+      </div>
+      <div class="benefit-item">
+        <ion-icon name="gift-outline" class="benefit-icon"></ion-icon>
+        <p class="benefit-title">Rewards Program</p>
+      </div>
+      <div class="benefit-item">
+        <ion-icon name="cash-outline" class="benefit-icon"></ion-icon>
+        <p class="benefit-title">Low Fees</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards-container">
+    <ion-item class="card-item">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Purchases</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="card-content">
+            <p class="card-title">Groceries</p>
+            <p class="card-details">Transaction details, location, etc.</p>
+            <p class="card-date">Sep 12, 2023</p>
+          </div>
+          <ion-icon name="cart-outline" slot="start" class="card-icon"></ion-icon>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+
+    <ion-item class="card-item">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Payments</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="card-content">
+            <p class="card-title">Electric Bill</p>
+            <p class="card-details">Transaction details, payment status, etc.</p>
+            <p class="card-date">Sep 10, 2023</p>
+          </div>
+          <ion-icon name="cash-outline" slot="start" class="card-icon"></ion-icon>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+
+    <!-- Add more cards or elements as needed for additional features -->
+
+  </div>
+
+</ion-content>
