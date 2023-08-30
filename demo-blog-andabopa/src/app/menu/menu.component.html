@@ -6,7 +6,7 @@
           <ion-note>{{ settings.emailbusiness }}</ion-note>
     
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+            <ion-item routerDirection="root" *ngIf="p.enabled" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
               <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title  }}</ion-label>
             </ion-item>
@@ -14,7 +14,7 @@
         </ion-list>
         
         <!-- si no tiene session iniciada muestra el siguiente boton -->
-        <ion-list>
+        <ion-list *ngIf="!isLoggedIn">
           <ion-menu-toggle auto-hide="false" >
             <ion-item routerDirection="root" [routerLink]="'/login'" lines="none" detail="false" routerLinkActive="selected">
               <ion-icon aria-hidden="true" slot="start" [ios]="'log-in-outline'" [md]="'log-in-sharp'"></ion-icon> 

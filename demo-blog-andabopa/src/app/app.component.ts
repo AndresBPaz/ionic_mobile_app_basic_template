@@ -1,6 +1,7 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { IonRouterOutlet, Platform } from '@ionic/angular';
 import { Settings } from './settings';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-root',
@@ -8,16 +9,13 @@ import { Settings } from './settings';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  public appPages = [
-    { title: 'Blog', url: '/folder/inbox', icon: 'newspaper' },
-    { title: 'Buscar', url: '/search', icon: 'search' },
-    { title: 'Desarrollo', url: '/folder/favorites', icon: 'code-working' },
-    { title: 'Cuenta', url: '/folder/archived', icon: 'person' },
-    { title: 'Nuestra organización', url: '/folder/spam', icon: 'business' },
-  ];
 
   //@ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
-  constructor(private platform: Platform, public settings: Settings) {
+  constructor(
+    private platform: Platform, 
+    public settings: Settings,
+    private storage: Storage
+    ) {
     this.initializeApp();
   }
 
@@ -32,5 +30,11 @@ export class AppComponent {
     this.platform.ready().then(() => {
       // Realiza cualquier inicialización necesaria aquí
     });
+  }
+
+  async ngOnInit() {
+    // If using a custom driver:
+    // await this.storage.defineDriver(MyCustomDriver)
+    await this.storage.create();
   }
 }

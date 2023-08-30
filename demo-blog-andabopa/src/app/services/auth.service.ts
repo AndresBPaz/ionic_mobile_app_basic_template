@@ -22,7 +22,7 @@ export class AuthService {
     login(username: string, password: string): Observable<any> {
       const url = `${environment.apiUrl}/jwt-auth/v1/token`;
     
-     // console.log('username'+username);
+     //console.log('username'+username);
 
       return this.http.post(url, { 
           username: username,
@@ -32,12 +32,13 @@ export class AuthService {
             const token = response.token;
             // Almacenar el token en el almacenamiento local para futuras solicitudes
             this.storage.set('token', token);
-      
             // Verificar si el token es válido
             if (!this.jwtHelper.isTokenExpired(token)) {
               // El token es válido, realizar acciones adicionales si es necesario
+              //console.log("token valido");
             } else {
               // El token no es válido, manejar el error
+              //console.log("token no valido");
             }
           })
       );

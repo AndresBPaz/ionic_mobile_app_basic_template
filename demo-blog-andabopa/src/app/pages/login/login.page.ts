@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
   path: any = 'login'; 
   segment: any = 'login';
   errorsRegister: any;
-
+  errors: any;
   isenableSubmit: boolean = true;
 
   status: any = {};
@@ -69,28 +69,29 @@ export class LoginPage implements OnInit {
         this.authService.login(this.form.value.username, this.form.value.password).subscribe(
           (response) => {
             // Manejar la respuesta de éxito de la autenticación
-            //console.log(response);
+            console.log(response);
             this.isenableSubmit = false;
+            this.status = response;
+
+            this.storage.set("token",this.status.token);
+            this.storage.set("user_email",this.status.user_email);
+            this.storage.set("user_nicename",this.status.user_nicename);
+            this.storage.set("user_display_name",this.status.user_display_name);
+
+            this.settings.user.token = this.status.token;
+            this.settings.user.user_email = this.status.user_email;
+            this.settings.user.user_nicename = this.status.user_nicename;
+            this.settings.user.user_display_name = this.status.user_display_name;
+
+            this.close(true);
           },
           (error) => {
             // Manejar el error de autenticación
             this.errorMessage = '<strong>ERROR<\/strong>:'+error.error.message;
             console.error(error);
-            /*if (this.errors) {
-              this.errors = this.errors;
-              for (var key in this.errors) {
-                  this.errors[key].forEach((item, index) => {
-                      this.errors[key][index] = this.errors[key][index].replace('<strong>ERROR<\/strong>:', '');
-                      this.errors[key][index] = this.errors[key][index].replace('/a>', '/span>');
-                      this.errors[key][index] = this.errors[key][index].replace('<a', '<span');
-                  });
-              }
-            }*/
-  
             this.isenableSubmit = true;
           }
         );
-  
       }
     }
   
