@@ -9,6 +9,13 @@
 
 <ion-content>
 
+  <swiper-container [modules]="slideOpts" >
+    <swiper-slide *ngFor="let slide of slides">
+      <img class="ion-activatable ion-focusable hydrated" src="{{slide.image}}" alt="{{slide.alt}}" (click)="onLinkClick(slide.url)"> 
+    </swiper-slide> 
+  </swiper-container>
+ 
+
   <!-- Mostrar las entradas del blog en tarjetas -->
   <ion-card *ngFor="let post of posts" [routerLink]="['/post/', post.id]">
     <ion-card-header>

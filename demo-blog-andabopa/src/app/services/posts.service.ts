@@ -15,6 +15,11 @@ export class PostsService {
     this.url = environment.apiUrl + '/wp/v2/posts';
   } 
 
+  getSliders(): Observable<any> {
+    //TODO: Implementar logica para obtener los sliders del blog
+    throw new Error('Method not implemented.');
+  }
+
   getPosts(page: number, perPage: number): Observable<Post[]> {
     let params = new HttpParams();
     params = params.set('page', page.toString());

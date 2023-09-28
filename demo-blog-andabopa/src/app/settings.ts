@@ -11,7 +11,7 @@ export class Settings implements OnInit{
     appname: string = 'Demo Blog';
     emailbusiness: string = 'info@dominatecode-co.com';
     user: any = {};
-
+    dir: any = 'ltr';
     ngOnInit(): void {
         throw new Error("Method not implemented.");
     }

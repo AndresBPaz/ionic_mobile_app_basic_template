@@ -2,7 +2,9 @@ import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { IonRouterOutlet, Platform } from '@ionic/angular';
 import { Settings } from './settings';
 import { Storage } from '@ionic/storage-angular';
+//import { register } from 'swiper/element/bundle';
 
+//register();
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
